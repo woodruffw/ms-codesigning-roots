@@ -1,0 +1,37 @@
+name: check for bundle updates
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 12 * * *'
+
+jobs:
+  check-bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+          cache: pip
+
+      - name: try to update bundle.pem
+        run: |
+          python -m venv env && source env/bin/activate
+          python -m pip install requirements.txt
+          python make-bundle.py
+          python test-bundle.py
+
+      - name: create PR
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "[BOT] update bundle.pem"
+          branch: update-bundle
+          branch-suffix: timestamp
+          title: "[BOT] update bundle.pem"
+          body: |
+            This is an automated pull request, updating `bundle.pem` after a detected change.
+
+            Please review manually before merging.
+          assignees: "woodruffw"
+          reviewers: "woodruffw"

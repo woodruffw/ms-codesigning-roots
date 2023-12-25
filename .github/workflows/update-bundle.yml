@@ -18,7 +18,7 @@ jobs:
       - name: try to update bundle.pem
         run: |
           python -m venv env && source env/bin/activate
-          python -m pip install requirements.txt
+          python -m pip install -r requirements.txt
           python make-bundle.py
           python test-bundle.py
 

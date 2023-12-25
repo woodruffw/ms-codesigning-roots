@@ -25,6 +25,7 @@ jobs:
       - name: create PR
         uses: peter-evans/create-pull-request@v5
         with:
+          add-paths: bundle.pem
           commit-message: "[BOT] update bundle.pem"
           branch: update-bundle
           branch-suffix: timestamp

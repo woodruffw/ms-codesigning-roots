@@ -3,7 +3,6 @@
 # make-bundle.py: fetch the latest MS codesigning bundle from CCADB,
 # munge it into a new bundle with some pretty-printed metadata
 
-import sys
 
 import requests
 from cryptography import x509

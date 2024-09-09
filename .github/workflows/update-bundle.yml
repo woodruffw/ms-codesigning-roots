@@ -26,7 +26,7 @@ jobs:
           python test-bundle.py
 
       - name: create PR
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           add-paths: bundle.pem
           commit-message: "[BOT] update bundle.pem"
